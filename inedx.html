@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>马克思主义基本原理</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- 引入Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  
+  <!-- 配置Tailwind自定义颜色和字体 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#E53E3E', // 红色作为主色调，象征革命和社会主义
+            secondary: '#2D3748', // 深灰色作为次要色调
+            accent: '#3182CE', // 蓝色作为强调色
+            light: '#F7FAFC', // 浅色背景
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .transition-custom {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+  </style>
+  
+  <style>
+    /* 全局样式 */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* 自定义滚动条 */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #E53E3E;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #c53030;
+    }
+    
+    /* 动画效果 */
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .scale-up {
+      transition: transform 0.3s ease;
+    }
+    
+    .scale-up:hover {
+      transform: scale(1.03);
+    }
+    
+    /* 导航栏滚动效果 */
+    .navbar-scrolled {
+      background-color: rgba(229, 62, 62, 0.95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body class="bg-light text-secondary">
+  <!-- 导航栏 -->
+  <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-3">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex justify-between items-center">
+        <a href="#" class="flex items-center space-x-2">
+          <i class="fa fa-book text-white text-2xl"></i>
+          <span class="text-white font-bold text-xl">马克思主义基本原理</span>
+        </a>
+        
+        <!-- 桌面端导航 -->
+        <div class="hidden md:flex space-x-8">
+          <a href="#introduction" class="text-white hover:text-gray-200 transition-colors">概述</a>
+          <a href="#philosophy" class="text-white hover:text-gray-200 transition-colors">哲学原理</a>
+          <a href="#economics" class="text-white hover:text-gray-200 transition-colors">政治经济学</a>
+          <a href="#socialism" class="text-white hover:text-gray-200 transition-colors">科学社会主义</a>
+          <a href="#contemporary" class="text-white hover:text-gray-200 transition-colors">当代价值</a>
+        </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+          <i class="fa fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-primary/95">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+        <a href="#introduction" class="text-white hover:text-gray-200 py-2 transition-colors">概述</a>
+        <a href="#philosophy" class="text-white hover:text-gray-200 py-2 transition-colors">哲学原理</a>
+        <a href="#economics" class="text-white hover:text-gray-200 py-2 transition-colors">政治经济学</a>
+        <a href="#socialism" class="text-white hover:text-gray-200 py-2 transition-colors">科学社会主义</a>
+        <a href="#contemporary" class="text-white hover:text-gray-200 py-2 transition-colors">当代价值</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <header class="bg-primary pt-24 pb-16 md:pt-32 md:pb-24">
+    <div class="container mx-auto px-4 md:px-6 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight text-shadow fade-in">
+        马克思主义基本原理
+      </h1>
+      <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 fade-in">
+        揭示人类社会发展规律，指引人类解放的科学理论
+      </p>
+      <a href="#introduction" class="inline-block bg-white text-primary font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-custom transform hover:-translate-y-1 fade-in">
+        了解更多 <i class="fa fa-arrow-down ml-2"></i>
+      </a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 md:px-6 py-12">
+    <!-- 概述部分 -->
+    <section id="introduction" class="mb-20">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center mb-8">
+          <div class="w-12 h-1 bg-primary rounded-full mr-4"></div>
+          <h2 class="text-3xl font-bold">马克思主义概述</h2>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-8 scale-up">
+          <div class="flex flex-col md:flex-row gap-8">
+            <div class="md:w-1/2">
+              <img src="https://picsum.photos/id/1005/600/400" alt="马克思主义创始人" class="rounded-lg shadow-md w-full h-auto">
+            </div>
+            <div class="md:w-1/2">
+              <p class="text-lg mb-4">
+                马克思主义是由卡尔·马克思和弗里德里希·恩格斯创立的科学理论体系，是关于自然、社会和思维发展的一般规律的学说。
+              </p>
+              <p class="mb-4">
+                马克思主义包括三个主要组成部分：马克思主义哲学、马克思主义政治经济学和科学社会主义。它是无产阶级认识世界和改造世界的强大思想武器，为人类解放事业提供了科学的理论指导。
+              </p>
+              <div class="flex flex-wrap gap-3 mt-6">
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">科学理论</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">无产阶级解放</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">社会发展规律</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">辩证唯物主义</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 哲学原理部分 -->
+    <section id="philosophy" class="mb-20">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center mb-8">
+          <div class="w-12 h-1 bg-primary rounded-full mr-4"></div>
+          <h2 class="text-3xl font-bold">马克思主义哲学原理</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- 辩证唯物主义 -->
+          <div class="bg-white rounded-xl shadow-lg p-6 scale-up">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fa fa-flask text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold">辩证唯物主义</h3>
+            </div>
+            <p class="mb-4">
+              辩证唯物主义认为世界的本原是物质，物质是第一性的，意识是第二性的，物质决定意识，意识对物质具有能动作用。
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>物质决定意识的唯物主义观点</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>事物普遍联系和永恒发展的辩证法</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>对立统一规律是事物发展的根本规律</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- 历史唯物主义 -->
+          <div class="bg-white rounded-xl shadow-lg p-6 scale-up">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fa fa-history text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold">历史唯物主义</h3>
+            </div>
+            <p class="mb-4">
+              历史唯物主义揭示了人类社会发展的基本规律，强调社会存在决定社会意识，生产力决定生产关系，经济基础决定上层建筑。
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>社会基本矛盾是社会发展的根本动力</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>阶级斗争是阶级社会发展的直接动力</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>人民群众是历史的创造者</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- 唯物辩证法三大规律图表 -->
+        <div class="mt-10 bg-white rounded-xl shadow-lg p-6 scale-up">
+          <h3 class="text-xl font-semibold mb-6 text-center">唯物辩证法三大规律</h3>
+          <div class="h-80">
+            <canvas id="dialecticsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 政治经济学部分 -->
+    <section id="economics" class="mb-20">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center mb-8">
+          <div class="w-12 h-1 bg-primary rounded-full mr-4"></div>
+          <h2 class="text-3xl font-bold">马克思主义政治经济学</h2>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-8 scale-up">
+          <div class="flex flex-col md:flex-row gap-8">
+            <div class="md:w-1/2">
+              <h3 class="text-xl font-semibold mb-4">劳动价值理论</h3>
+              <p class="mb-4">
+                马克思创立了科学的劳动价值理论，认为商品的价值是由生产商品所耗费的社会必要劳动时间决定的。
+              </p>
+              <p class="mb-6">
+                劳动是价值的唯一源泉，具体劳动创造使用价值，抽象劳动创造价值。
+              </p>
+              
+              <h3 class="text-xl font-semibold mb-4">剩余价值理论</h3>
+              <p class="mb-4">
+                剩余价值理论揭示了资本主义剥削的秘密，指出剩余价值是由雇佣工人创造的被资本家无偿占有的超过劳动力价值的价值。
+              </p>
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                  <span>绝对剩余价值：通过延长工作日获得</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                  <span>相对剩余价值：通过提高劳动生产率获得</span>
+                </li>
+              </ul>
+            </div>
+            <div class="md:w-1/2">
+              <img src="https://picsum.photos/id/180/600/400" alt="政治经济学图解" class="rounded-lg shadow-md w-full h-auto mb-6">
+              
+              <h3 class="text-xl font-semibold mb-4">资本主义基本矛盾</h3>
+              <p class="mb-4">
+                生产的社会化与生产资料资本主义私人占有之间的矛盾是资本主义的基本矛盾，这一矛盾是资本主义社会一切冲突的总根源。
+              </p>
+              <div class="bg-primary/5 p-4 rounded-lg">
+                <p class="italic text-primary/80">
+                  "资本积累的历史趋势是资本主义制度必然被社会主义制度所代替。"
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 资本主义发展规律 -->
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-xl shadow-lg p-6 scale-up">
+            <div class="text-center mb-4">
+              <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-line-chart text-primary text-2xl"></i>
+              </div>
+              <h3 class="text-lg font-semibold">资本积累</h3>
+            </div>
+            <p class="text-center">
+              资本家通过剩余价值资本化，不断扩大生产规模，导致财富集中和两极分化。
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-lg p-6 scale-up">
+            <div class="text-center mb-4">
+              <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-exclamation-triangle text-primary text-2xl"></i>
+              </div>
+              <h3 class="text-lg font-semibold">经济危机</h3>
+            </div>
+            <p class="text-center">
+              资本主义基本矛盾导致周期性经济危机，表现为生产过剩、企业倒闭和工人失业。
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-lg p-6 scale-up">
+            <div class="text-center mb-4">
+              <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-balance-scale text-primary text-2xl"></i>
+              </div>
+              <h3 class="text-lg font-semibold">必然灭亡</h3>
+            </div>
+            <p class="text-center">
+              资本主义基本矛盾不可调和，必然被更高级的社会形态——社会主义所取代。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 科学社会主义部分 -->
+    <section id="socialism" class="mb-20">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center mb-8">
+          <div class="w-12 h-1 bg-primary rounded-full mr-4"></div>
+          <h2 class="text-3xl font-bold">科学社会主义</h2>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-8 scale-up">
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-4">社会主义代替资本主义的历史必然性</h3>
+            <p class="mb-4">
+              科学社会主义揭示了社会主义代替资本主义是人类社会发展的客观规律，是生产关系一定要适应生产力发展状况规律作用的必然结果。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              <div class="bg-primary/5 p-4 rounded-lg">
+                <h4 class="font-medium mb-2">资本主义基本矛盾</h4>
+                <p>生产社会化与生产资料私人占有之间的矛盾日益尖锐，阻碍生产力发展。</p>
+              </div>
+              <div class="bg-primary/5 p-4 rounded-lg">
+                <h4 class="font-medium mb-2">无产阶级的历史使命</h4>
+                <p>无产阶级作为先进生产力的代表，肩负着推翻资本主义、建设社会主义的历史使命。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-col md:flex-row gap-8">
+            <div class="md:w-1/2">
+              <img src="https://picsum.photos/id/1040/600/400" alt="科学社会主义" class="rounded-lg shadow-md w-full h-auto">
+            </div>
+            <div class="md:w-1/2">
+              <h3 class="text-xl font-semibold mb-4">社会主义革命和建设</h3>
+              <p class="mb-4">
+                科学社会主义阐明了无产阶级进行革命斗争的道路和策略，指出无产阶级必须通过革命推翻资产阶级统治，建立无产阶级专政。
+              </p>
+              <p class="mb-4">
+                在社会主义建设时期，要大力发展生产力，逐步消灭阶级差别，实现人的全面发展，为向共产主义过渡创造条件。
+              </p>
+              <div class="flex flex-wrap gap-3 mt-4">
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">无产阶级专政</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">生产资料公有制</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">计划经济</span>
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">人的全面发展</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 当代价值部分 -->
+    <section id="contemporary" class="mb-20">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center mb-8">
+          <div class="w-12 h-1 bg-primary rounded-full mr-4"></div>
+          <h2 class="text-3xl font-bold">马克思主义的当代价值</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-xl shadow-lg p-6 scale-up">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fa fa-globe text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold">对当代世界的指导意义</h3>
+            </div>
+            <p class="mb-4">
+              马克思主义仍然是分析和解决当代资本主义社会问题的科学理论工具，为理解经济全球化、金融危机、社会不平等等问题提供了科学方法。
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>揭示了资本主义基本矛盾的新表现形式</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>为发展中国家走向现代化提供了理论参考</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>对构建人类命运共同体具有重要启示</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-lg p-6 scale-up">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fa fa-flag text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold">在中国的发展</h3>
+            </div>
+            <p class="mb-4">
+              马克思主义中国化的理论成果指导着中国特色社会主义伟大实践，为中国的现代化建设提供了科学的理论指导和行动指南。
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>毛泽东思想：马克思主义中国化的第一次飞跃</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>中国特色社会主义理论体系：马克思主义中国化的第二次飞跃</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                <span>习近平新时代中国特色社会主义思想：马克思主义中国化的最新成果</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- 马克思主义影响力数据 -->
+        <div class="mt-10 bg-white rounded-xl shadow-lg p-6 scale-up">
+          <h3 class="text-xl font-semibold mb-6 text-center">马克思主义在当代的影响力</h3>
+          <div class="h-80">
+            <canvas id="influenceChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-secondary text-white py-12">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fa fa-book text-white text-2xl"></i>
+            <span class="text-white font-bold text-xl">马克思主义基本原理</span>
+          </div>
+          <p class="text-gray-400 max-w-md">
+            马克思主义是科学的世界观和方法论，是我们认识世界、改造世界的强大思想武器。
+          </p>
+        </div>
+        
+        <div class="flex flex-col items-center md:items-end">
+          <div class="flex space-x-4 mb-4">
+            <a href="#" class="text-white hover:text-primary transition-colors">
+              <i class="fa fa-facebook text-xl"></i>
+            </a>
+            <a href="#" class="text-white hover:text-primary transition-colors">
+              <i class="fa fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="text-white hover:text-primary transition-colors">
+              <i class="fa fa-instagram text-xl"></i>
+            </a>
+            <a href="#" class="text-white hover:text-primary transition-colors">
+              <i class="fa fa-linkedin text-xl"></i>
+            </a>
+          </div>
+          <p class="text-gray-400">
+            &copy; 2025“只求元”（抖音：JR6459）. 保留所有权利.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('navbar-scrolled');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+      }
+    });
+    
+    // 移动端菜单切换
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 点击移动端菜单项后关闭菜单
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.add('hidden');
+      });
+    });
+    
+    // 初始化图表
+    window.addEventListener('DOMContentLoaded', function() {
+      // 唯物辩证法三大规律图表
+      const dialecticsCtx = document.getElementById('dialecticsChart').getContext('2d');
+      new Chart(dialecticsCtx, {
+        type: 'radar',
+        data: {
+          labels: ['对立统一规律', '质量互变规律', '否定之否定规律'],
+          datasets: [{
+            label: '重要性程度',
+            data: [95, 85, 80],
+            backgroundColor: 'rgba(229, 62, 62, 0.2)',
+            borderColor: 'rgba(229, 62, 62, 1)',
+            pointBackgroundColor: 'rgba(229, 62, 62, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(229, 62, 62, 1)'
+          }]
+        },
+        options: {
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                stepSize: 20
+              }
+            }
+          }
+        }
+      });
+      
+      // 马克思主义影响力图表
+      const influenceCtx = document.getElementById('influenceChart').getContext('2d');
+      new Chart(influenceCtx, {
+        type: 'bar',
+        data: {
+          labels: ['学术研究', '政治影响', '社会运动', '文化领域', '经济分析'],
+          datasets: [{
+            label: '影响力指数',
+            data: [90, 75, 85, 65, 88],
+            backgroundColor: [
+              'rgba(229, 62, 62, 0.7)',
+              'rgba(49, 130, 206, 0.7)',
+              'rgba(56, 178, 172, 0.7)',
+              'rgba(159, 122, 234, 0.7)',
+              'rgba(237, 137, 54, 0.7)'
+            ],
+            borderColor: [
+              'rgba(229, 62, 62, 1)',
+              'rgba(49, 130, 206, 1)',
+              'rgba(56, 178, 172, 1)',
+              'rgba(159, 122, 234, 1)',
+              'rgba(237, 137, 54, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                stepSize: 20
+              }
+            }
+          }
+        }
+      });
+    });
+    
+    // 元素进入视口时添加动画效果
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('section > div > div').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
